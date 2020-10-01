@@ -35,6 +35,7 @@ public class Player : MonoBehaviour
     {
         if (Input.GetMouseButton(0))                                                                                           //How to fire the gun
         {
+            ObjectPoolingManager.Instance,GetBullet ();
             if (Input.GetMouseButtonDown(0))
             {
                 if (ammo > 0)
@@ -70,10 +71,10 @@ public class Player : MonoBehaviour
 
                     isHurt = true;
 
-                    Vector3 hurtDirectrion = (transform.position - enemy.transform.position).normalized;                          //Perform the knockback effect         
+                    Vector3 hurtDirectrion = (transform.position - enemy.transform.position).normalized;                          //Perform the knockback effect    
                     Vector3 hurtDirection = default;
                     Vector3 KnockbackDirection = (hurtDirection + Vector3.up).normalized;
-                    GetComponent<Rigidbody>().AddForce(KnockbackDirection * knockbackForce);
+                    GetComponent<ForceReceiver> ().AddForce (KnockbackDirection, knockbackForce);
 
                     StartCoroutine(HurtRoutine());
                 }
@@ -81,7 +82,7 @@ public class Player : MonoBehaviour
 
 
             }
-        }
+        } 
     }
     IEnumerator HurtRoutine ()
     {
