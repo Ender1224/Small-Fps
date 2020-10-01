@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,8 +7,6 @@ public class Player : MonoBehaviour
 {
     [Header("visuals")]
     public Camera playerCamera;
-
-    public GameObject bulletPrefab;
 
     [Header("Gameplay")]
     public int initialHealth = 100;
@@ -22,6 +21,8 @@ public class Player : MonoBehaviour
     public int Ammo { get { return ammo; } }
 
     private bool isHurt;
+    public GameObject bulletPrefab;
+    
 
     // Start is called before the first frame update
     void Start()
@@ -35,7 +36,6 @@ public class Player : MonoBehaviour
     {
         if (Input.GetMouseButton(0))                                                                                           //How to fire the gun
         {
-            ObjectPoolingManager.Instance,GetBullet ();
             if (Input.GetMouseButtonDown(0))
             {
                 if (ammo > 0)
@@ -48,7 +48,6 @@ public class Player : MonoBehaviour
                 }
 
             }
-
         }
     }
     private void OnControllerColliderHit(ControllerColliderHit hit)
